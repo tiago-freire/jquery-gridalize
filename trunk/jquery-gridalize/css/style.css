@@ -1,0 +1,7 @@
+* {margin:0; padding:0; font-family:Verdana; font-size:12px; color:#000; }
+body {float: left; width: 100%; margin-top: 10px;}
+#content {float: left; width: 90%; margin: 2% 5%; border: #000 solid 1px;}
+.btn {float:left; margin-left: 5%; width: 150px; padding: 2px; font-weight: bold; cursor: pointer;}
+#btn-centralize {float:left; margin-left: 5%; width: 150px; padding: 2px; font-weight: bold;}
+#content img {float: left; border: #000 solid 1px;}
+#content span {border: red dashed 2px;}
