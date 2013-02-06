@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<title>jQuery-Centralize</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-centralize-0.1.js"></script>
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
+		<script type="text/javascript">
+			$(function() {
+				$('#btn-centralize').click(function() {
+					$('#content').centralize({verticalSpace: '30px'});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<input class="btn" type="button" value="<< Home" onclick="location.href='index.html'" />
+		<div id="content">
+			<object width="200" height="250"><param name="movie" value="http://www.youtube.com/v/0M8mT2qAd9A?fs=1&amp;hl=pt_BR"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/0M8mT2qAd9A?fs=1&amp;hl=pt_BR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="200" height="250"></embed></object>
+			<object width="250" height="250"><param name="movie" value="http://www.youtube.com/v/EfqM_pbdwfQ?fs=1&amp;hl=pt_BR"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/EfqM_pbdwfQ?fs=1&amp;hl=pt_BR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="250" height="250"></embed></object>
+			
+			<object width="200" height="250"><param name="movie" value="http://www.youtube.com/v/0M8mT2qAd9A?fs=1&amp;hl=pt_BR"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/0M8mT2qAd9A?fs=1&amp;hl=pt_BR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="200" height="250"></embed></object>
+			<img src="images/150x200.jpg" />
+		</div>
+		<input class="btn" id="btn-centralize" type="button" value="Centralize it!" />
+	</body>
+</html>
