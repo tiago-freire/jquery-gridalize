@@ -1,5 +1,5 @@
 jQuery.fn.extend({
-	centralize: function(parameters) {
+	gridalize: function(parameters) {
 		var defaultOptions = {
 			verticalSpace: ''
 		}
