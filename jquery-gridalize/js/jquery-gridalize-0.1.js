@@ -1,30 +1,32 @@
 jQuery.fn.extend({
 	gridalize: function(parameters) {
+                //initializing
 		var defaultOptions = {
 			verticalSpace: ''
-		}
+		};
 		
 		var options = jQuery.extend(defaultOptions, parameters);
-		
-		var parent = $(this);
+		var parent = jQuery(this);
 		var children = parent.children();
 		var totalWidth = parent.width();
 		console.log('totalWidth = ' + totalWidth);
 		var images = parent.children('img');
 		var countImagesLoaded = 0;
-		
-		var calculateMarginLeft = function(totalWidth, count, averageWidth) {
-			return Math.floor((totalWidth - (count * averageWidth)) / (count + 1));
+                var isIE6 = jQuery.browser.msie && parseInt(jQuery.browser.version) == 6;
+		var calculateMarginLeft = function(totalWidth, countByLine, averageWidth) {
+			return Math.floor((totalWidth - (countByLine * averageWidth)) / (countByLine + 1));
 		};
-		
-		var calculateRatio = function(totalWidth, count, averageWidth, marginLeft) {
-			return (totalWidth - (count * (marginLeft + averageWidth) + marginLeft)) / count;
+		var calculateRatio = function(totalWidth, countByLine, averageWidth, marginLeft) {
+			return (totalWidth - (countByLine * (marginLeft + averageWidth) + marginLeft)) / countByLine;
 		};
 
+		/* ensuring loading of images */
 		images.each(function() {
+			/* binding an increased of images count on load event */
 			jQuery(this).load(function() { countImagesLoaded++; });
 
-			if(this.complete || (jQuery.browser.msie && parseInt(jQuery.browser.version) == 6)) {
+			/* when image is in cache or the browser is IE6, the load event is triggered */
+			if(this.complete || isIE6) {
 				jQuery(this).trigger("load");
 			}
 		});
@@ -35,7 +37,7 @@ jQuery.fn.extend({
 			
 			children.each(function() {
 				var eachWidth = jQuery(this).outerWidth();
-				console.log('jQuery(this).outerWidth() = ' + jQuery(this).outerWidth());
+
 				if(eachWidth > 0) {
 					jQuery(this).css('float', 'left');
 					sumWidth += eachWidth;
@@ -47,36 +49,30 @@ jQuery.fn.extend({
 			console.log('averageWidth = ' + averageWidth);
 
 			var maxCountByLine = Math.floor(totalWidth / averageWidth);
-			var count = maxCountByLine < totalCount ? maxCountByLine : totalCount;
+			var countByLine = maxCountByLine < totalCount ? maxCountByLine : totalCount;
 			console.log('maxCountByLine = ' + maxCountByLine);
 			console.log('totalCount = ' + totalCount);
-			console.log('count = ' + count);
+			console.log('countByLine = ' + countByLine);
 
-			var marginLeft = calculateMarginLeft(totalWidth, count, averageWidth);
+			var marginLeft = calculateMarginLeft(totalWidth, countByLine, averageWidth);
+                        var ratio = calculateRatio(totalWidth, countByLine, averageWidth, marginLeft);
 			console.log('marginLeft = ' + marginLeft);
-			while(calculateRatio(totalWidth, count, averageWidth, marginLeft) != 0) {
-				console.log('ratio = ' + calculateRatio(totalWidth, count, averageWidth, marginLeft));
-				marginLeft = calculateMarginLeft(totalWidth, --count, averageWidth);
+                        console.log('ratio = ' + calculateRatio(totalWidth, countByLine, averageWidth, marginLeft));
+			
+			if(ratio > 0.5 && ratio < 1) {
+				countByLine = Math.floor(0.75 * countByLine);
+				marginLeft = calculateMarginLeft(totalWidth, countByLine, averageWidth);
 				console.log('NEW marginLeft = ' + marginLeft);
+				console.log('NEW countByLine = ' + countByLine);
 			}
 			
-//			if(ratio > 0 && ratio < 1) {
-//				marginLeft = calculateMarginLeft(totalWidth, --count, averageWidth);
-//				console.log('NEW marginLeft = ' + marginLeft);
-//			}
-			
 			var newProperties = {};
-			newProperties['margin-left'] = marginLeft;
+			newProperties['margin-left'] = marginLeft + 'px';
 			if(options.verticalSpace) {
 				newProperties['margin-top'] = options.verticalSpace;
 				parent.css('padding-bottom', options.verticalSpace);
 				
 			}
-//			if(maxCountByLine < totalCount) {
-//				newProperties['margin-top'] = marginLeft;
-//			} else {
-//				newProperties['margin-top'] = Math.floor(marginLeft / 5);
-//			}
 
 			children.css(newProperties);
 		}
