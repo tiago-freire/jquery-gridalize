@@ -59,7 +59,7 @@ jQuery.fn.extend({
 			console.log('marginLeft = ' + marginLeft);
                         console.log('ratio = ' + calculateRatio(totalWidth, countByLine, averageWidth, marginLeft));
 			
-			if(ratio > 0.5 && ratio < 1) {
+			if(ratio >= 0.5 && ratio <= 1) {
 				countByLine = Math.floor(0.75 * countByLine);
 				marginLeft = calculateMarginLeft(totalWidth, countByLine, averageWidth);
 				console.log('NEW marginLeft = ' + marginLeft);
