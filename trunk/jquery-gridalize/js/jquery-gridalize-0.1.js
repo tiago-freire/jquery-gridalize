@@ -23,7 +23,7 @@ jQuery.fn.extend({
 			/* binding an increased of images count on load event */
 			jQuery(this).load(function() { countImagesLoaded++; });
 
-			/* when image is in cache or the browser is IE6, the load event is triggered */
+			/* when image is in cache the load event is triggered */
 			if(this.complete) {
 				jQuery(this).trigger("load");
 			}
