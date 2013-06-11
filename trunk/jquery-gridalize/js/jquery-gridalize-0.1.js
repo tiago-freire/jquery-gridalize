@@ -11,7 +11,6 @@ jQuery.fn.extend({
 		var totalWidth = parent.width();
 		var images = parent.children('img');
 		var countImagesLoaded = 0;
-                var isIE6 = jQuery.browser.msie && parseInt(jQuery.browser.version) == 6;
 		var calculateMarginLeft = function(totalWidth, countByLine, averageWidth) {
 			return Math.floor((totalWidth - (countByLine * averageWidth)) / (countByLine + 1));
 		};
@@ -25,7 +24,7 @@ jQuery.fn.extend({
 			jQuery(this).load(function() { countImagesLoaded++; });
 
 			/* when image is in cache or the browser is IE6, the load event is triggered */
-			if(this.complete || isIE6) {
+			if(this.complete) {
 				jQuery(this).trigger("load");
 			}
 		});
