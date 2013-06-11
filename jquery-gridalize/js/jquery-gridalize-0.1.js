@@ -9,7 +9,6 @@ jQuery.fn.extend({
 		var parent = jQuery(this);
 		var children = parent.children();
 		var totalWidth = parent.width();
-		console.log('totalWidth = ' + totalWidth);
 		var images = parent.children('img');
 		var countImagesLoaded = 0;
                 var isIE6 = jQuery.browser.msie && parseInt(jQuery.browser.version) == 6;
@@ -17,7 +16,7 @@ jQuery.fn.extend({
 			return Math.floor((totalWidth - (countByLine * averageWidth)) / (countByLine + 1));
 		};
 		var calculateRatio = function(totalWidth, countByLine, averageWidth, marginLeft) {
-			return (totalWidth - (countByLine * (marginLeft + averageWidth) + marginLeft)) / countByLine;
+                        return (totalWidth - (countByLine * (marginLeft + averageWidth) + marginLeft)) / countByLine;
 		};
 
 		/* ensuring loading of images */
@@ -46,24 +45,16 @@ jQuery.fn.extend({
 			});
 
 			var averageWidth = sumWidth / totalCount;
-			console.log('averageWidth = ' + averageWidth);
 
 			var maxCountByLine = Math.floor(totalWidth / averageWidth);
 			var countByLine = maxCountByLine < totalCount ? maxCountByLine : totalCount;
-			console.log('maxCountByLine = ' + maxCountByLine);
-			console.log('totalCount = ' + totalCount);
-			console.log('countByLine = ' + countByLine);
 
 			var marginLeft = calculateMarginLeft(totalWidth, countByLine, averageWidth);
                         var ratio = calculateRatio(totalWidth, countByLine, averageWidth, marginLeft);
-			console.log('marginLeft = ' + marginLeft);
-                        console.log('ratio = ' + calculateRatio(totalWidth, countByLine, averageWidth, marginLeft));
 			
 			if(ratio >= 0.5 && ratio <= 1) {
 				countByLine = Math.floor(0.75 * countByLine);
 				marginLeft = calculateMarginLeft(totalWidth, countByLine, averageWidth);
-				console.log('NEW marginLeft = ' + marginLeft);
-				console.log('NEW countByLine = ' + countByLine);
 			}
 			
 			var newProperties = {};
