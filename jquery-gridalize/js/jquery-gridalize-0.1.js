@@ -67,7 +67,13 @@ jQuery.fn.extend({
 				
                 }
 
-                children.css(newProperties);
+                children.each(function(index) {
+                    $(this).css(newProperties);
+                    
+                    if(index % countByLine == 0) {
+                        $(this).css('clear', 'left');
+                    }
+                });
             }
         }
         
