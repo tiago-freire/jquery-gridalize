@@ -59,8 +59,11 @@ jQuery.fn.extend({
                     marginLeft = calculateMarginLeft(totalWidth, countByLine, averageWidth);
                 }
 			
-                var newProperties = {};
-                newProperties['margin-left'] = marginLeft + 'px';
+                var newProperties = {
+                    'margin-left': marginLeft + 'px',
+                    'clear': 'none'
+                };
+                
                 if(options.verticalSpace) {
                     newProperties['margin-top'] = options.verticalSpace;
                     parent.css('padding-bottom', options.verticalSpace);
