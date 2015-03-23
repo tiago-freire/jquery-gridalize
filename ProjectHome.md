@@ -1,0 +1,1 @@
+Plugin jQuery para organizar a exibição de coleções em páginas web, sob diversas variações de tamanhos, conteúdos e mídias.
